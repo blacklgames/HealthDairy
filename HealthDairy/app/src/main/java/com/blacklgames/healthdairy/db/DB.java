@@ -4,23 +4,34 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+
+import com.blacklgames.healthdairy.db.DO.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DB implements IDatabaseHandler
+public class DB
 {
-
     private static volatile DB instance;
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "HDDB";
-    private static final String TABLE_USERS = "users";
-    private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
+
+    private static final String TABLE_USERS = "table_users";
+    private static final String KEY_USER_ID = "key_user_id";
+    private static final String KEY_USER_NAME = "key_user_name";
+    private static final String KEY_USER_PASS = "key_user_pass";
+    private static final String KEY_USER_CURRENT = "key_user_current";
+
+    enum eUserKeyPos
+    {
+        K_USER_ID,
+        K_USER_NAME,
+        K_USER_PASS,
+        K_USER_CURRENT,
+        K_MAX
+    }
 
     Context mContext;
-
 
     public static DB get() {
         DB localInstance = instance;
@@ -35,40 +46,49 @@ public class DB implements IDatabaseHandler
         return localInstance;
     }
 
-    private DB()
-    {
-
-    }
-
     public void setBaseContext(Context context)
     {
         mContext = context;
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USERS + " (" +
+                                                   KEY_USER_ID + " INTEGER PRIMARY KEY, " +
+                                                   KEY_USER_NAME + " TEXT, " +
+                                                   KEY_USER_PASS+ " TEXT, " +
+                                                   KEY_USER_CURRENT + " INTEGER)");
+        db.close();
     }
 
-
-    public void upgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    public void setCurrentUserId(int id)
     {
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-        //onCreate(db);
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
+        //db.execSQL("UPDATE " + TABLE_INFO + " SET " + KEY_CURRENT_ID + " = " + id);
+        db.close();
     }
 
-    @Override
+    public User getCurrentUser()
+    {
+        List<User> list = getAllUsers();
+        return  list.get(0);
+    }
+
     public void addUser(User user)
     {
-        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
         ContentValues values = new ContentValues();
+        values.put(KEY_USER_ID, user.get_id());
+        values.put(KEY_USER_NAME, user.get_name());
+        values.put(KEY_USER_PASS, user.get_pass());
+        values.put(KEY_USER_CURRENT, user.is_current());
 
-        values.put(KEY_NAME, user.getName());
-
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
         db.insert(TABLE_USERS, null, values);
         db.close();
     }
 
-    @Override
     public User getUser(int id)
     {
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.query(TABLE_USERS, new String[]{KEY_ID, KEY_NAME},KEY_ID + "=?",
+        String[] kList = new String[]{KEY_USER_ID, KEY_USER_NAME, KEY_USER_PASS, KEY_USER_CURRENT};
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
+        Cursor cursor = db.query(TABLE_USERS, kList ,KEY_USER_ID + "=?",
              new String[]{String.valueOf(id)}, null,null, null, null);
 
         if(null != cursor)
@@ -76,65 +96,66 @@ public class DB implements IDatabaseHandler
             cursor.moveToFirst();
         }
 
-        User user = new User(Integer.parseInt(cursor.getString(0)),
-                            cursor.getString(1));
+        User user = new User();
+        user.set_name(cursor.getString(eUserKeyPos.K_USER_NAME.ordinal()));
+        user.set_name(cursor.getString(eUserKeyPos.K_USER_PASS.ordinal()));
+        user.set_id(Integer.parseInt(cursor.getString(eUserKeyPos.K_USER_ID.ordinal())));
+        user.set_current(Integer.parseInt(cursor.getString(eUserKeyPos.K_USER_CURRENT.ordinal())) > 0);
         return  user;
     }
 
-    @Override
     public List<User> getAllUsers()
     {
         List<User> list = new ArrayList<User>();
         String selectQuery = "SELECT  * FROM " + TABLE_USERS;
 
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if(cursor.moveToFirst())
         {
             do {
                 User user = new User();
-                user.setId(Integer.parseInt(cursor.getString(0)));
-                user.setName(cursor.getString(1));
+                user.set_name(cursor.getString(eUserKeyPos.K_USER_NAME.ordinal()));
+                user.set_name(cursor.getString(eUserKeyPos.K_USER_PASS.ordinal()));
+                user.set_id(Integer.parseInt(cursor.getString(eUserKeyPos.K_USER_ID.ordinal())));
+                user.set_current(Integer.parseInt(cursor.getString(eUserKeyPos.K_USER_CURRENT.ordinal())) > 0);
+                list.add(user);
             }while (cursor.moveToNext());
         }
         return list;
     }
 
-    @Override
     public int updateUser(User user)
     {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, user.getName());
-        return db.update(TABLE_USERS, values, KEY_ID + " =?",
-                        new String[]{String.valueOf(user.getId())});
+        values.put(KEY_USER_ID, user.get_id());
+        values.put(KEY_USER_NAME, user.get_name());
+        values.put(KEY_USER_PASS, user.get_pass());
+        values.put(KEY_USER_CURRENT, user.is_current());
+
+        return db.update(TABLE_USERS, values, KEY_USER_ID + " =?",
+                        new String[]{String.valueOf(user.get_id())});
     }
 
-    @Override
     public void deleteUser(User user)
     {
-        SQLiteDatabase db = getWritableDatabase();
-        db.delete(TABLE_USERS, KEY_ID + " =?", new String[]{String.valueOf(user.getId())});
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
+        db.delete(TABLE_USERS, KEY_USER_ID + " =?", new String[]{String.valueOf(user.get_id())});
         db.close();
     }
 
-    @Override
     public void deleteAll()
     {
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
         db.delete(TABLE_USERS, null, null);
         db.close();
     }
 
-    @Override
     public int getUsersCount()
     {
-        String countQuery = "SELECT  * FROM " + TABLE_USERS;
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
-        return cursor.getCount();
+        return getAllUsers().size();
     }
 }
