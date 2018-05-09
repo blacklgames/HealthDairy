@@ -1,4 +1,8 @@
-package com.blacklgames.healthdairy.db.DO;
+package com.blacklgames.healthdairy.db.dataobjects;
+
+import android.util.Log;
+
+import com.blacklgames.healthdairy.db.DB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +12,11 @@ public class User {
     private int _id;
     private String _name;
     private String _pass;
-    private boolean _current;
-    private List<Recipe> _receipt_list = new ArrayList<Recipe>();
+    private String _receipt_list;
 
-    public boolean is_current() {
-        return _current;
-    }
+    public String get_receipt_list() { return _receipt_list; }
 
-    public void set_current(boolean _current) {
-        this._current = _current;
-    }
+    public void set_receipt_list(String _receipt_list) { this._receipt_list = _receipt_list;}
 
     public int get_id() {
         return _id;

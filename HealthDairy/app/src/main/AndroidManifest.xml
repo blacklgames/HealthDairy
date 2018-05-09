@@ -17,9 +17,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserHistoryActivity"
-            android:label="@string/title_activity_user_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".user_main_screen.UserMainActivity"
+            android:label="@string/title_activity_user_main"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AddReceiptActivity"
+            android:label="@string/title_activity_add_receipt"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

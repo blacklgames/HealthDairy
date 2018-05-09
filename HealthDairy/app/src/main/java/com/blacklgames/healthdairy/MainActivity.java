@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import com.blacklgames.healthdairy.db.DO.User;
+import com.blacklgames.healthdairy.db.dataobjects.User;
 import com.blacklgames.healthdairy.db.DB;
+import com.blacklgames.healthdairy.user_main_screen.UserMainActivity;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -23,9 +24,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         DB.get().setBaseContext(getBaseContext());
 
-        if(DB.get().getUsersCount() > 0)
+        if(DB.get().users().getUsersCount() > 0)
         {
-            Intent intent = new Intent(this, UserHistoryActivity.class);
+            Intent intent = new Intent(this, UserMainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
         else {
@@ -41,13 +43,13 @@ public class MainActivity extends AppCompatActivity
         if(strName.length() > 0)
         {
             User user = new User();
-            user.set_id(DB.get().getUsersCount());
+            user.set_id(DB.get().users().getUsersCount());
             user.set_name(strName);
             user.set_pass("");
-            user.set_current(true);
-            DB.get().addUser(user);
+            DB.get().users().addUser(user);
 
-            Intent intent = new Intent(this, UserHistoryActivity.class);
+            Intent intent = new Intent(this, UserMainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
         else
