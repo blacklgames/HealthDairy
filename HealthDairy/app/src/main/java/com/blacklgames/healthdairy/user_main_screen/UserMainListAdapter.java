@@ -28,7 +28,7 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.diagnose);
+            mTextView = (TextView) v.findViewById(R.id.receipt_item);
         }
     }
 
@@ -64,6 +64,7 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     @Override
     public int getItemCount()
     {
+        Log.d("getItemCount", "size " + mReceiptList.size());
         return mReceiptList.size();
     }
 }
