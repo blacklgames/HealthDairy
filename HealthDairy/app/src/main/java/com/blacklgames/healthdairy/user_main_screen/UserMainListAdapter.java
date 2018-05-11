@@ -1,6 +1,7 @@
 package com.blacklgames.healthdairy.user_main_screen;
 
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.dataobjects.Receipt;
+import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
 
@@ -44,21 +46,25 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
 
     // Создает новые views (вызывается layout manager-ом)
     @Override
-    public UserMainListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType)
+    public UserMainListAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType)
     {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_receipt_list_item, parent,false);
+        final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_receipt_list_item, parent,false);
+        final ViewHolder vh = new ViewHolder(v);
 
-        v.setOnClickListener(new View.OnClickListener(){
+        vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Log.d("clit " , "c;oc");
+            public void onClick(View view)
+            {
+                long newposition = vh.getItemId();
+
+                Log.d("onCreate ", "position " + newposition);
+                Intent intent = new Intent(parent.getContext(), ReceiptMainActivity.class);
+                intent.putExtra("Position", newposition);
+                //parent.getContext().startActivity(intent);
             }
         });
-
         // тут можно программно менять атрибуты лэйаута (size, margins, paddings и др.)
-
-        ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.blacklgames.healthdairy.AddReceiptActivity;
 import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.DB;
+import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
 {
     private int mCurrentUser = 0;
     private RecyclerView mList;
-    private RecyclerView.Adapter mListAdapter;
+    private UserMainListAdapter mListAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -131,5 +132,14 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void onItemClick(View v)
+    {
+        int pos = mList.indexOfChild(v);
+        Log.d("onItemClick", "pos " + pos);
+        //Intent intent = new Intent(this, ReceiptMainActivity.class);
+        //startActivity(intent);
     }
 }
