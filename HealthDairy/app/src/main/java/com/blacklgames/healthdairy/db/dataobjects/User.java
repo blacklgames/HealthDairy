@@ -12,11 +12,12 @@ public class User {
     private int _id;
     private String _name;
     private String _pass;
-    private String _receipt_list;
+    private String _receipt_list = "";
 
     public String get_receipt_list() { return _receipt_list; }
 
-    public void set_receipt_list(String _receipt_list) { this._receipt_list = _receipt_list;}
+    public void add_receipt_id(String _receipt_list) {
+        this._receipt_list += _receipt_list;}
 
     public int get_id() {
         return _id;
@@ -26,9 +27,7 @@ public class User {
         this._id = _id;
     }
 
-    public String get_name() {
-        return _name;
-    }
+    public String get_name() {return _name;}
 
     public void set_name(String _name) {
         this._name = _name;

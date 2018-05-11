@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.blacklgames.healthdairy.AddReceiptActivity;
 import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.DB;
+import com.blacklgames.healthdairy.db.dataobjects.User;
 import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
@@ -69,11 +70,13 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
 
     private void initReceiptList()
     {
+        User user = DB.get().users().getUser(0);
+
         mList = (RecyclerView)findViewById(R.id.receiptList);
         mList.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(this);
         mList.setLayoutManager(mLayoutManager);
-        mListAdapter = new UserMainListAdapter((ArrayList)DB.get().receipts().getAllReceipts());
+        mListAdapter = new UserMainListAdapter((ArrayList)DB.get().receipts().getReceiptsById(user.get_receipt_list()));
         mList.setAdapter(mListAdapter);
     }
 

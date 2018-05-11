@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.blacklgames.healthdairy.db.dataobjects.Receipt;
 import com.blacklgames.healthdairy.interfaces.IDBReceiptsHandler;
@@ -118,6 +119,36 @@ public class DBReceiptsHandler implements IDBReceiptsHandler
                 receipt.set_drug_list(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
                 receipt.set_date(cursor.getString(eReceiptKeyPos.K_RECEIPT_DATE.ordinal()));
                 list.add(receipt);
+            }
+            while (cursor.moveToNext());
+        }
+        return list;
+    }
+    public List<Receipt> getReceiptsById(String ids)
+    {
+        List<Receipt> list = new ArrayList<Receipt>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                Log.d(ids, Integer.toString(cursor.getInt(eReceiptKeyPos.K_RECEIPT_ID.ordinal())));
+                if(ids.contains(Integer.toString(cursor.getInt(eReceiptKeyPos.K_RECEIPT_ID.ordinal()))))
+                {
+                    Receipt receipt = new Receipt();
+                    receipt.set_id(cursor.getInt(eReceiptKeyPos.K_RECEIPT_ID.ordinal()));
+                    receipt.set_coast(cursor.getInt(eReceiptKeyPos.K_RECEIPT_COAST.ordinal()));
+                    receipt.set_rate(cursor.getInt(eReceiptKeyPos.K_RECEIPT_RATE.ordinal()));
+                    receipt.set_photo(cursor.getInt(eReceiptKeyPos.K_RECEIPT_PHOTO.ordinal()));
+                    receipt.set_comments(cursor.getString(eReceiptKeyPos.K_RECEIPT_COMMENTS.ordinal()));
+                    receipt.set_diagnosis(cursor.getString(eReceiptKeyPos.K_RECEIPT_DIAGNOSE.ordinal()));
+                    receipt.set_drug_list(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
+                    receipt.set_date(cursor.getString(eReceiptKeyPos.K_RECEIPT_DATE.ordinal()));
+                    list.add(receipt);
+                }
             }
             while (cursor.moveToNext());
         }

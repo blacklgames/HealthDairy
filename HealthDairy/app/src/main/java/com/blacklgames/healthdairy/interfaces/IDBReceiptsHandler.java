@@ -9,6 +9,7 @@ public interface IDBReceiptsHandler extends IDBHandler
     public void addReceipt(Receipt receipt);
     public Receipt getReceipt(int id);
     public List<Receipt> getAllReceipts();
+    public List<Receipt> getReceiptsById(String ids);
     public int updateReceipt(Receipt user);
     public void deleteReceipt(Receipt user);
     public void deleteAll();

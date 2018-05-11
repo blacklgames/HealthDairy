@@ -1,6 +1,7 @@
 package com.blacklgames.healthdairy.user_main_screen;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,8 +24,10 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
 
-    public static class ViewHolder extends RecyclerView.ViewHolder
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
+        Context mContext;
+
         // наш пункт состоит только из одного TextView
         public TextView mDiagnoseText;
         public TextView mDateText;
@@ -32,9 +35,24 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
 
         public ViewHolder(View v) {
             super(v);
+            v.setOnClickListener(this);
             mDiagnoseText = (TextView) v.findViewById(R.id.text_diagnose);
             mDateText = (TextView) v.findViewById(R.id.text_date);
             mDrugsText = (TextView) v.findViewById(R.id.text_drugs);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Log.d("onClick", "onClick " + getPosition());
+
+            Intent intent = new Intent(mContext, ReceiptMainActivity.class);
+            intent.putExtra("RECEIPT_ID_POSITION", getPosition());
+            mContext.startActivity(intent);
+        }
+
+        public void setContext(Context c)
+        {
+            mContext = c;
         }
     }
 
@@ -50,20 +68,9 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     {
         // create a new view
         final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_receipt_list_item, parent,false);
-        final ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder(v);
+        vh.setContext(parent.getContext());
 
-        vh.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                long newposition = vh.getItemId();
-
-                Log.d("onCreate ", "position " + newposition);
-                Intent intent = new Intent(parent.getContext(), ReceiptMainActivity.class);
-                intent.putExtra("Position", newposition);
-                //parent.getContext().startActivity(intent);
-            }
-        });
         // тут можно программно менять атрибуты лэйаута (size, margins, paddings и др.)
         return vh;
     }
