@@ -47,14 +47,13 @@ public class ReceiptMainActivity extends AppCompatActivity {
         TextView tfCoast = (TextView)findViewById(R.id.dTextCoast);
         TextView tfComments = (TextView)findViewById(R.id.dTextComments);
         TextView tfRate = (TextView)findViewById(R.id.dTextRate);
-        TextView tfDrugs = (TextView)findViewById(R.id.dTextDrugs);
 
         Log.d("onCreate", receipt.get_diagnosis());
         tfDiagnose.setText(receipt.get_diagnosis());
         tfDate.setText(receipt.get_date());
         tfCoast.setText(Float.toString(receipt.get_coast()));
         tfComments.setText(receipt.get_comments());
-        tfDrugs.setText(receipt.get_drug_list());
+
     }
 
 }

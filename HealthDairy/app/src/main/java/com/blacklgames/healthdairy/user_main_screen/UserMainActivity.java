@@ -64,7 +64,6 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
     {
         Log.d("fab click", "fab click");
         Intent intent = new Intent(this, AddReceiptActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -135,14 +134,5 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-    public void onItemClick(View v)
-    {
-        int pos = mList.indexOfChild(v);
-        Log.d("onItemClick", "pos " + pos);
-        //Intent intent = new Intent(this, ReceiptMainActivity.class);
-        //startActivity(intent);
     }
 }
