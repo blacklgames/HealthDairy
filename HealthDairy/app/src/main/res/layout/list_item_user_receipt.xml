@@ -19,11 +19,11 @@
             android:text="Drugs"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_date"
-            app:layout_constraintTop_toBottomOf="@+id/text_diagnose" />
+            app:layout_constraintStart_toEndOf="@+id/di_textDrugMethod"
+            app:layout_constraintTop_toBottomOf="@+id/di_textDrugName" />
 
         <TextView
-            android:id="@+id/text_diagnose"
+            android:id="@+id/di_textDrugName"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginLeft="16dp"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_date"
+            android:id="@+id/di_textDrugMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -70,7 +70,7 @@
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_diagnose" />
+            app:layout_constraintTop_toBottomOf="@+id/di_textDrugName" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,14 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.TextView;
 
-import com.blacklgames.healthdairy.AddReceiptActivity;
+import com.blacklgames.healthdairy.add_receipt_screen.AddReceiptActivity;
 import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.DB;
 import com.blacklgames.healthdairy.db.dataobjects.User;
-import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
 
@@ -40,6 +36,7 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Список рецептов");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +59,8 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
 
     private void addReceipt()
     {
-        Log.d("fab click", "fab click");
         Intent intent = new Intent(this, AddReceiptActivity.class);
+        intent.putExtra("RECEIPT_ID", -1); // -1 - create new receipt.
         startActivity(intent);
     }
 

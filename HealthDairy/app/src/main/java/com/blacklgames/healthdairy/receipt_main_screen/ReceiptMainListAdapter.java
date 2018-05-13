@@ -1,4 +1,4 @@
-package com.blacklgames.healthdairy.user_main_screen;
+package com.blacklgames.healthdairy.receipt_main_screen;
 
 
 import android.content.Context;
@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blacklgames.healthdairy.R;
+import com.blacklgames.healthdairy.db.dataobjects.Drug;
 import com.blacklgames.healthdairy.db.dataobjects.Receipt;
-import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
 
 
-public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapter.ViewHolder>
+public class ReceiptMainListAdapter extends RecyclerView.Adapter<ReceiptMainListAdapter.ViewHolder>
 {
-    private ArrayList<Receipt> mReceiptList;
+    private ArrayList<Drug> mDrugsList;
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
@@ -29,16 +29,14 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
         Context mContext;
 
         // наш пункт состоит только из одного TextView
-        public TextView mDiagnoseText;
-        public TextView mDateText;
-        public TextView mDrugsText;
+        public TextView mDrugName;
+        public TextView mDrugMethod;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mDiagnoseText = (TextView) v.findViewById(R.id.di_textDrugName);
-            mDateText = (TextView) v.findViewById(R.id.di_textDrugMethod);
-            mDrugsText = (TextView) v.findViewById(R.id.text_drugs);
+            mDrugName = (TextView) v.findViewById(R.id.di_textDrugName);
+            mDrugMethod = (TextView) v.findViewById(R.id.di_textDrugMethod);
         }
 
         @Override
@@ -57,17 +55,17 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     }
 
     // Конструктор
-    public UserMainListAdapter(ArrayList<Receipt> list)
+    public ReceiptMainListAdapter(ArrayList<Drug> list)
     {
-        mReceiptList = list;
+        mDrugsList = list;
     }
 
     // Создает новые views (вызывается layout manager-ом)
     @Override
-    public UserMainListAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType)
+    public ReceiptMainListAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType)
     {
         // create a new view
-        final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_user_receipt, parent,false);
+        final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_receipt_drugs, parent,false);
         ViewHolder vh = new ViewHolder(v);
         vh.setContext(parent.getContext());
 
@@ -79,15 +77,15 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position)
     {
-        holder.mDiagnoseText.setText(mReceiptList.get(position).get_diagnosis());
-        holder.mDateText.setText(mReceiptList.get(position).get_date());
-        holder.mDrugsText.setText(mReceiptList.get(position).get_drug_list());
+        holder.mDrugName.setText(mDrugsList.get(position).get_name());
+        String method = ""; // TODO: create method;
+        holder.mDrugMethod.setText(method);
     }
 
     // Возвращает размер данных (вызывается layout manager-ом)
     @Override
     public int getItemCount()
     {
-        return mReceiptList.size();
+        return mDrugsList.size();
     }
 }

@@ -135,7 +135,6 @@ public class DBReceiptsHandler implements IDBReceiptsHandler
         if(cursor.moveToFirst())
         {
             do {
-                Log.d(ids, Integer.toString(cursor.getInt(eReceiptKeyPos.K_RECEIPT_ID.ordinal())));
                 if(ids.contains(Integer.toString(cursor.getInt(eReceiptKeyPos.K_RECEIPT_ID.ordinal()))))
                 {
                     Receipt receipt = new Receipt();

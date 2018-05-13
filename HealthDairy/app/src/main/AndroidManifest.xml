@@ -21,12 +21,16 @@
             android:label="@string/title_activity_user_main"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".AddReceiptActivity"
+            android:name=".add_receipt_screen.AddReceiptActivity"
             android:label="@string/title_activity_add_receipt"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".receipt_main_screen.ReceiptMainActivity"
             android:label="@string/title_activity_receipt_main"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AddDrugActivity"
+            android:label="@string/title_activity_add_drug"
             android:theme="@style/AppTheme"></activity>
     </application>
 

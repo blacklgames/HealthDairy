@@ -131,6 +131,37 @@ public class DBDrugsHandler implements IDBDrugsHandler
         return list;
     }
 
+    public List<Drug> getDrugsById(String ids)
+    {
+        List<Drug> list = new ArrayList<Drug>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                if(ids.contains(Integer.toString(cursor.getInt(eDrugKeyPos.K_DRUG_ID.ordinal()))))
+                {
+                    Drug drug = new Drug();
+                    drug.set_id(cursor.getInt(eDrugKeyPos.K_DRUG_ID.ordinal()));
+                    drug.set_name(cursor.getString(eDrugKeyPos.K_DRUG_NAME.ordinal()));
+                    drug.set_comments(cursor.getString(eDrugKeyPos.K_DRUG_COMMENTS.ordinal()));
+                    drug.set_count(cursor.getInt(eDrugKeyPos.K_DRUG_COUNT.ordinal()));
+                    drug.set_period(cursor.getInt(eDrugKeyPos.K_DRUG_PERIOD.ordinal()));
+                    drug.set_input_cont(cursor.getInt(eDrugKeyPos.K_DRUG_INPUT_COUNT.ordinal()));
+                    drug.set_input_period(cursor.getInt(eDrugKeyPos.K_DRUG_INPUT_PERIOD.ordinal()));
+                    drug.set_coast(cursor.getFloat(eDrugKeyPos.K_DRUG_COAST.ordinal()));
+                    drug.set_count_on_taking(cursor.getFloat(eDrugKeyPos.K_DRUG_COUNT_ON_TAKING.ordinal()));
+                    list.add(drug);
+                }
+            }
+            while (cursor.moveToNext());
+        }
+        return list;
+    }
+
     public int updateDrug(Drug drug)
     {
         ContentValues values = new ContentValues();
