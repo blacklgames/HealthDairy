@@ -11,4 +11,49 @@
     <string name="title_activity_add_receipt">AddReceiptActivity</string>
     <string name="title_activity_receipt_main">ReceiptMainActivity</string>
     <string name="title_activity_add_drug">AddDrugActivity</string>
+    <string name="ad_label_name">Название:</string>
+    <string name="ad_label_count_in">раза в</string>
+    <string name="ad_label_input_method">Способ приема:</string>
+    <string name="ad_label_duration">Продолжительность:</string>
+    <string name="ad_input_hint">1</string>
+    <string name="ad_label_by">по</string>
+    <string name="ad_label_comments">Комментарии:</string>
+    <string name="ad_hint_drug_name">Название препарата...</string>
+    <string name="ad_hint_comments">Ваши комментарии...</string>
+
+    <string-array name="drug_common_period_list">
+        <item>дней</item>
+        <item>раз</item>
+        <item>часов</item>
+        <item>недель</item>
+        <item>месяцев</item>
+        <item>лет</item>
+    </string-array>
+    <string-array name="drug_period_list">
+        <item>день</item>
+        <item>час</item>
+        <item>неделю</item>
+        <item>месяц</item>
+        <item>год</item>
+    </string-array>
+    <string-array name="drug_input_type_list">
+        <item>Пероральный</item>
+        <item>Внутримышечный</item>
+        <item>Ингаляционный</item>
+        <item>Внутривенный</item>
+        <item>Буккальный</item>
+        <item>Ректальный</item>
+        <item>Вагинальный</item>
+        <item>Уретральный</item>
+        <item>Внутриартериальный</item>
+    </string-array>
+    <string-array name="drug_pack_list">
+        <item>таб.</item>
+        <item>мл.</item>
+        <item>кап.</item>
+        <item>амп.</item>
+        <item>пак.</item>
+        <item>гр.</item>
+        <item></item>
+    </string-array>
 </resources>

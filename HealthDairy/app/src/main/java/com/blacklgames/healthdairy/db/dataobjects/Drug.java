@@ -2,16 +2,17 @@ package com.blacklgames.healthdairy.db.dataobjects;
 
 public class Drug
 {
-
     private int _id;
     private String _name;
-    private String _comments;
-    private int _count;
-    private int _period;
-    private int _input_cont;
+    private int _input_count;
     private int _input_period;
+    private float _drug_count;
+    private int _pack;
+    private int _duration;
+    private int _duration_period;
+    private int _input_type;
     private float _coast;
-    private float _count_on_taking;
+    private String _comments;
 
     public int get_id(){ return _id;}
 
@@ -33,25 +34,23 @@ public class Drug
         this._comments = _comments;
     }
 
-    public int get_count() {
-        return _count;
+    public int get_duration() {
+        return _duration;
     }
 
-    public void set_count(int _count) {
-        this._count = _count;
+    public void set_duration(int _duration) {
+        this._duration = _duration;
     }
 
-    public int get_period() {return _period;}
+    public int get_duration_period() {return _duration_period;}
 
-    public void set_period(int _period) {
-        this._period = _period;
+    public void set_duration_period(int _duration_period) {this._duration_period = _duration_period;}
+
+    public int get_input_count() {
+        return _input_count;
     }
 
-    public int get_input_cont() {
-        return _input_cont;
-    }
-
-    public void set_input_cont(int _input_cont_) {this._input_cont = _input_cont_;}
+    public void set_input_count(int _input_cont_) {this._input_count = _input_cont_;}
 
     public int get_input_period() {
         return _input_period;
@@ -69,10 +68,16 @@ public class Drug
         this._coast = _coast;
     }
 
-    public float get_count_on_taking() {
-        return _count_on_taking;
-    }
+    public float get_drug_count() { return _drug_count; }
 
-    public void set_count_on_taking(float _count_on_taking) {this._count_on_taking = _count_on_taking;}
+    public void set_drug_count(float _drug_count) { this._drug_count = _drug_count; }
+
+    public int get_input_type() {return _input_type;}
+
+    public void set_input_type(int _input_type) {this._input_type = _input_type;}
+
+    public int get_pack() { return _pack;}
+
+    public void set_pack(int _pack) {this._pack = _pack;}
 }
 
