@@ -17,7 +17,7 @@ public class Receipt
 
     public String get_drug_list() { return _drug_list;}
 
-    public void set_drug_list(String _drug_list) {this._drug_list = _drug_list; }
+    public void add_drug_id(String _id) {this._drug_list += _id; }
 
     public int get_rate() {return _rate;}
 

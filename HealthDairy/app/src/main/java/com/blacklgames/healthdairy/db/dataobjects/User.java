@@ -16,8 +16,7 @@ public class User {
 
     public String get_receipt_list() { return _receipt_list; }
 
-    public void add_receipt_id(String _receipt_list) {
-        this._receipt_list += _receipt_list;}
+    public void add_receipt_id(String _receipt_list) { this._receipt_list += _receipt_list;}
 
     public int get_id() {
         return _id;

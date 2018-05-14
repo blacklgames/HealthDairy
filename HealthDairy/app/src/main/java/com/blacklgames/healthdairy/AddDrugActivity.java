@@ -13,7 +13,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blacklgames.healthdairy.db.DB;
 import com.blacklgames.healthdairy.db.dataobjects.Drug;
+import com.blacklgames.healthdairy.db.dataobjects.Receipt;
+import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 public class AddDrugActivity extends AppCompatActivity
 {
@@ -41,16 +44,18 @@ public class AddDrugActivity extends AppCompatActivity
         IP_MAX
     }
 
-    TextView mName;
-    TextView mInputCount;
-    Spinner  mInputPeriod;
-    TextView mDrugCount;
-    Spinner  mPack;
-    TextView mDuration;
-    Spinner  mDurationPeriod;
-    Spinner  mInputType;
-    TextView mCoast;
-    TextView mComments;
+    private TextView mName;
+    private TextView mInputCount;
+    private Spinner  mInputPeriod;
+    private TextView mDrugCount;
+    private Spinner  mPack;
+    private TextView mDuration;
+    private Spinner  mDurationPeriod;
+    private Spinner  mInputType;
+    private TextView mCoast;
+    private TextView mComments;
+
+    private int mReceiptId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,8 @@ public class AddDrugActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Добавьте Препарат");
+
+        mReceiptId = getIntent().getIntExtra(ReceiptMainActivity.KEY_RECEIPT_ID, 0);
 
         mName = findViewById(R.id.ad_txtName);
         mInputCount = findViewById(R.id.ad_txtInputCount);
@@ -77,73 +84,21 @@ public class AddDrugActivity extends AppCompatActivity
         periodAdapter.setDropDownViewResource(R.layout.spinner_item);
         mInputPeriod.setAdapter(periodAdapter);
         mInputPeriod.setSelection(0);
-        mInputPeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
-            }
-        });
 
         ArrayAdapter<CharSequence> methodAdapter = ArrayAdapter.createFromResource(this, R.array.drug_pack_list, R.layout.spinner_item);
         methodAdapter.setDropDownViewResource(R.layout.spinner_item);
         mPack.setAdapter(methodAdapter);
         mPack.setSelection(0);
-        mPack.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
-            }
-        });
 
         ArrayAdapter<CharSequence> commonPeriodAdapter = ArrayAdapter.createFromResource(this, R.array.drug_common_period_list, R.layout.spinner_item);
         methodAdapter.setDropDownViewResource(R.layout.spinner_item);
         mDurationPeriod.setAdapter(commonPeriodAdapter);
         mDurationPeriod.setSelection(0);
-        mDurationPeriod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
-            }
-        });
 
         ArrayAdapter<CharSequence> inputTypeAdapter = ArrayAdapter.createFromResource(this, R.array.drug_input_type_list, R.layout.spinner_item);
         methodAdapter.setDropDownViewResource(R.layout.spinner_item);
         mInputType.setAdapter(inputTypeAdapter);
         mInputType.setSelection(0);
-        mInputType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
-            }
-        });
     }
 
     @Override
@@ -178,7 +133,7 @@ public class AddDrugActivity extends AppCompatActivity
     private void addDrug()
     {
         Drug drug = new Drug();
-        //drug.set_id();
+        drug.set_id(DB.get().drugs().getDrugsCount());
         drug.set_name(mName.getText().toString());
         drug.set_input_count(Integer.parseInt(mInputCount.getText().toString()));
         drug.set_input_period(mInputPeriod.getSelectedItemPosition());
@@ -190,6 +145,10 @@ public class AddDrugActivity extends AppCompatActivity
         drug.set_coast(Float.parseFloat(mCoast.getText().toString()));
         drug.set_comments(mComments.getText().toString());
 
-
+        DB.get().drugs().addDrug(drug);
+        Receipt r = DB.get().receipts().getReceipt(mReceiptId);
+        r.add_drug_id(String.valueOf(drug.get_id()));
+        DB.get().receipts().updateReceipt(r);
+        onBackPressed();
     }
 }

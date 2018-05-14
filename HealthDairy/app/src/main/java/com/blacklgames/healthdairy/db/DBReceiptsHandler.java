@@ -94,7 +94,7 @@ public class DBReceiptsHandler implements IDBReceiptsHandler
         receipt.set_comments(cursor.getString(eReceiptKeyPos.K_RECEIPT_COMMENTS.ordinal()));
         receipt.set_diagnosis(cursor.getString(eReceiptKeyPos.K_RECEIPT_DIAGNOSE.ordinal()));
         receipt.set_date(cursor.getString(eReceiptKeyPos.K_RECEIPT_DATE.ordinal()));
-        receipt.set_drug_list(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
+        receipt.add_drug_id(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
         return  receipt;
     }
 
@@ -116,7 +116,7 @@ public class DBReceiptsHandler implements IDBReceiptsHandler
                 receipt.set_photo(cursor.getInt(eReceiptKeyPos.K_RECEIPT_PHOTO.ordinal()));
                 receipt.set_comments(cursor.getString(eReceiptKeyPos.K_RECEIPT_COMMENTS.ordinal()));
                 receipt.set_diagnosis(cursor.getString(eReceiptKeyPos.K_RECEIPT_DIAGNOSE.ordinal()));
-                receipt.set_drug_list(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
+                receipt.add_drug_id(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
                 receipt.set_date(cursor.getString(eReceiptKeyPos.K_RECEIPT_DATE.ordinal()));
                 list.add(receipt);
             }
@@ -144,7 +144,7 @@ public class DBReceiptsHandler implements IDBReceiptsHandler
                     receipt.set_photo(cursor.getInt(eReceiptKeyPos.K_RECEIPT_PHOTO.ordinal()));
                     receipt.set_comments(cursor.getString(eReceiptKeyPos.K_RECEIPT_COMMENTS.ordinal()));
                     receipt.set_diagnosis(cursor.getString(eReceiptKeyPos.K_RECEIPT_DIAGNOSE.ordinal()));
-                    receipt.set_drug_list(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
+                    receipt.add_drug_id(cursor.getString(eReceiptKeyPos.K_RECEIPT_DRUG_LIST.ordinal()));
                     receipt.set_date(cursor.getString(eReceiptKeyPos.K_RECEIPT_DATE.ordinal()));
                     list.add(receipt);
                 }

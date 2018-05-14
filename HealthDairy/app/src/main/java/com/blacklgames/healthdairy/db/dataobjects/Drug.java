@@ -3,7 +3,7 @@ package com.blacklgames.healthdairy.db.dataobjects;
 public class Drug
 {
     private int _id;
-    private String _name;
+    private String _name = "";
     private int _input_count;
     private int _input_period;
     private float _drug_count;
@@ -12,7 +12,7 @@ public class Drug
     private int _duration_period;
     private int _input_type;
     private float _coast;
-    private String _comments;
+    private String _comments = "";
 
     public int get_id(){ return _id;}
 

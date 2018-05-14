@@ -17,6 +17,7 @@ import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.DB;
 import com.blacklgames.healthdairy.db.dataobjects.Receipt;
 import com.blacklgames.healthdairy.db.dataobjects.User;
+import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -58,7 +59,12 @@ public class AddReceiptActivity extends AppCompatActivity
                 addDrugClick();
             }
         });
+    }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
         if(isNewReceipt())
         {
             Date date = new Date();
@@ -137,6 +143,7 @@ public class AddReceiptActivity extends AppCompatActivity
     private void addDrugClick()
     {
         Intent intent = new Intent(this, AddDrugActivity.class);
+        intent.putExtra(ReceiptMainActivity.KEY_RECEIPT_ID, mReceiptId);
         startActivity(intent);
     }
 }

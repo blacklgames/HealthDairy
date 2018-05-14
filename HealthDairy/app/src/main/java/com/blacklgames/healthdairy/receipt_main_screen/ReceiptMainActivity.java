@@ -23,6 +23,10 @@ import java.util.ArrayList;
 
 public class ReceiptMainActivity extends AppCompatActivity
 {
+    final public static String TAG = "ReceiptMainActivity";
+    final public static String KEY_RECEIPT_ID_POSITION = "RECEIPT_ID_POSITION";
+    final public static String KEY_RECEIPT_ID = "RECEIPT_ID";
+
     private RecyclerView mList;
     private RecyclerView.LayoutManager mLayoutManager;
     private ReceiptMainListAdapter mListAdapter;
@@ -40,7 +44,7 @@ public class ReceiptMainActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         User user = DB.get().users().getUser(0);
-        int intentData = intent.getIntExtra("RECEIPT_ID_POSITION", 0);
+        int intentData = intent.getIntExtra(KEY_RECEIPT_ID_POSITION, 0);
         final int receiptId = Character.getNumericValue(user.get_receipt_list().charAt(intentData));
         Receipt receipt = DB.get().receipts().getReceipt(receiptId);
 
@@ -50,7 +54,6 @@ public class ReceiptMainActivity extends AppCompatActivity
         TextView tfComments =   (TextView)findViewById(R.id.ar_txtComments);
         TextView tfRate =       (TextView)findViewById(R.id.ar_txtRate);
 
-        Log.d("onCreate", receipt.get_diagnosis());
         tfDiagnose.setText(receipt.get_diagnosis());
         tfDate.setText(receipt.get_date());
         tfCoast.setText(Float.toString(receipt.get_coast()));
@@ -65,6 +68,7 @@ public class ReceiptMainActivity extends AppCompatActivity
         });
 
         ArrayList<Drug> drugList = (ArrayList)DB.get().drugs().getDrugsById(receipt.get_drug_list());
+        Log.d(TAG, "drugList.size " + drugList.size());
         mList = (RecyclerView)findViewById(R.id.rm_drugsList);
         mList.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(this);
@@ -94,7 +98,6 @@ public class ReceiptMainActivity extends AppCompatActivity
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
-        //startActivity(new Intent(this, UserMainActivity.class));
     }
 
     private void editReceipt(int receiptId)

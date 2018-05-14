@@ -54,7 +54,18 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        initReceiptList();
+        mList = (RecyclerView)findViewById(R.id.receiptList);
+        mList.hasFixedSize();
+        mLayoutManager = new LinearLayoutManager(this);
+        mList.setLayoutManager(mLayoutManager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        User user = DB.get().users().getUser(0);
+        mListAdapter = new UserMainListAdapter((ArrayList)DB.get().receipts().getReceiptsById(user.get_receipt_list()));
+        mList.setAdapter(mListAdapter);
     }
 
     private void addReceipt()
@@ -62,18 +73,6 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
         Intent intent = new Intent(this, AddReceiptActivity.class);
         intent.putExtra("RECEIPT_ID", -1); // -1 - create new receipt.
         startActivity(intent);
-    }
-
-    private void initReceiptList()
-    {
-        User user = DB.get().users().getUser(0);
-
-        mList = (RecyclerView)findViewById(R.id.receiptList);
-        mList.hasFixedSize();
-        mLayoutManager = new LinearLayoutManager(this);
-        mList.setLayoutManager(mLayoutManager);
-        mListAdapter = new UserMainListAdapter((ArrayList)DB.get().receipts().getReceiptsById(user.get_receipt_list()));
-        mList.setAdapter(mListAdapter);
     }
 
     @Override
