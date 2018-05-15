@@ -148,18 +148,14 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvDrugsList"
+        android:id="@+id/ar_DrugsList"
         android:layout_width="360dp"
         android:layout_height="265dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/list_item_receipt_drugs" />
 
 </android.support.constraint.ConstraintLayout>

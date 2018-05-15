@@ -1,5 +1,6 @@
 package com.blacklgames.healthdairy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -132,23 +133,29 @@ public class AddDrugActivity extends AppCompatActivity
 
     private void addDrug()
     {
+        String nll = "0";
+        String count = mInputCount.getText().toString();
+        String coast = mCoast.getText().toString();
+        String drugCount = mDrugCount.getText().toString();
+        String duration = mDuration.getText().toString();
+
         Drug drug = new Drug();
         drug.set_id(DB.get().drugs().getDrugsCount());
         drug.set_name(mName.getText().toString());
-        drug.set_input_count(Integer.parseInt(mInputCount.getText().toString()));
+        drug.set_input_count(Integer.parseInt(count.length() > 0 ? count : nll));
         drug.set_input_period(mInputPeriod.getSelectedItemPosition());
-        drug.set_drug_count(Float.parseFloat(mDrugCount.getText().toString()));
+        drug.set_drug_count(Float.parseFloat(drugCount.length() > 0 ? drugCount : nll));
         drug.set_pack(mPack.getSelectedItemPosition());
-        drug.set_duration(Integer.parseInt(mDuration.getText().toString()));
+        drug.set_duration(Integer.parseInt(duration.length() > 0 ? duration : nll));
         drug.set_duration_period(mDurationPeriod.getSelectedItemPosition());
         drug.set_input_type(mInputType.getSelectedItemPosition());
-        drug.set_coast(Float.parseFloat(mCoast.getText().toString()));
+        drug.set_coast(Float.parseFloat(coast.length() > 0 ? coast : nll ));
         drug.set_comments(mComments.getText().toString());
-
         DB.get().drugs().addDrug(drug);
-        Receipt r = DB.get().receipts().getReceipt(mReceiptId);
-        r.add_drug_id(String.valueOf(drug.get_id()));
-        DB.get().receipts().updateReceipt(r);
-        onBackPressed();
+
+        Intent intent = new Intent();
+        intent.putExtra("drug_id", String.valueOf(drug.get_id()));
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

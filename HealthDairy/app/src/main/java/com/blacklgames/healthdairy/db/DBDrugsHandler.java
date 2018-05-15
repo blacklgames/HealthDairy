@@ -204,10 +204,13 @@ public class DBDrugsHandler implements IDBDrugsHandler
                          new String[]{String.valueOf(drug.get_id())});
     }
 
-    public void deleteDrug(Drug drug)
+    public void deleteDrugs(String ids)
     {
         SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
-        db.delete(TABLE_NAME, KEY_DRUG_ID + " =?", new String[]{String.valueOf(drug.get_id())});
+        for (int i = 0, n = ids.length(); i < n; i++)
+        {
+            db.delete(TABLE_NAME, KEY_DRUG_ID + " =?", new String[]{Character.toString(ids.charAt(i))});
+        }
         db.close();
     }
 

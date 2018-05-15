@@ -11,7 +11,7 @@ public interface IDBDrugsHandler extends IDBHandler
     public List<Drug> getAllDrugs();
     public List<Drug> getDrugsById(String ids);
     public int updateDrug(Drug drug);
-    public void deleteDrug(Drug drug);
+    public void deleteDrugs(String ids);
     public void deleteAll();
     public int getDrugsCount();
 }
