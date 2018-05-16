@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +45,8 @@ public class AddDrugActivity extends AppCompatActivity
         IP_YEAR,
         IP_MAX
     }
+
+    private static final String TAG = "AddDrugActivity";
 
     private TextView mName;
     private TextView mInputCount;
@@ -140,6 +143,7 @@ public class AddDrugActivity extends AppCompatActivity
         String duration = mDuration.getText().toString();
 
         Drug drug = new Drug();
+        Log.d(TAG, "count " + DB.get().drugs().getDrugsCount());
         drug.set_id(DB.get().drugs().getDrugsCount());
         drug.set_name(mName.getText().toString());
         drug.set_input_count(Integer.parseInt(count.length() > 0 ? count : nll));

@@ -137,18 +137,19 @@ public class AddReceiptActivity extends AppCompatActivity
 
     public void onAddClick()
     {
+        Receipt receipt;
         EditText tf = (EditText) findViewById(R.id.ar_txtDiagnose);
-        Receipt receipt = new Receipt();
-
-        receipt.set_id(isNewReceipt() ? DB.get().receipts().getReceiptsCount() : mReceiptId);
-        receipt.set_diagnosis(tf.getText().toString());
-        receipt.set_date(mDate.getText().toString());
-        receipt.set_comments(mComments.getText().toString());
-        receipt.add_drug_id(mNewDrugId);
         //receipt.set_coast(Float.parseFloat(mCoast.getText()));
 
         if(isNewReceipt())
         {
+            receipt = new Receipt();
+            receipt.set_id(DB.get().receipts().getReceiptsCount());
+            receipt.set_diagnosis(tf.getText().toString());
+            receipt.set_date(mDate.getText().toString());
+            receipt.set_comments(mComments.getText().toString());
+            receipt.add_drug_id(mNewDrugId);
+
             User user = DB.get().users().getUser(0);
             user.add_receipt_id(Integer.toString(receipt.get_id()));
             DB.get().receipts().addReceipt(receipt);
@@ -156,9 +157,14 @@ public class AddReceiptActivity extends AppCompatActivity
         }
         else
         {
+            receipt = DB.get().receipts().getReceipt(mReceiptId);
+            receipt.set_diagnosis(tf.getText().toString());
+            receipt.set_date(mDate.getText().toString());
+            receipt.set_comments(mComments.getText().toString());
+            receipt.add_drug_id(mNewDrugId);
             DB.get().receipts().updateReceipt(receipt);
         }
-        onBackPressed();
+        finish();
     }
 
     private void addDrugClick()

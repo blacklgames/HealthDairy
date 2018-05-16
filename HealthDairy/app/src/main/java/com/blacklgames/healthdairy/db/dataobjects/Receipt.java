@@ -4,12 +4,12 @@ public class Receipt
 {
     private int _id;
     private float _coast;
-    private String _date;
+    private String _date = "";
     private int _rate;
     private /*ImageView*/ int _photo;
-    private String _comments;
-    private String _diagnosis;
-    private String _drug_list ;
+    private String _comments = "";
+    private String _diagnosis = "";
+    private String _drug_list = "";
 
     public int get_id() { return _id; }
 

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.blacklgames.healthdairy.db.dataobjects.Drug;
 import com.blacklgames.healthdairy.interfaces.IDBDrugsHandler;
@@ -49,7 +50,7 @@ public class DBDrugsHandler implements IDBDrugsHandler
         mContext = context;
         SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
-                                                    KEY_DRUG_ID + " INTEGER PRIMARY KEY, " +
+                                                    KEY_DRUG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                     KEY_DRUG_NAME + " TEXT, " +
                                                     KEY_DRUG_INPUT_COUNT + " INTEGER, " +
                                                     KEY_DRUG_INPUT_PERIOD + " INTEGER, " +
@@ -128,6 +129,8 @@ public class DBDrugsHandler implements IDBDrugsHandler
 
         SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
         Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Log.d("getAllDrugs ", " cout " + cursor.getCount());
 
         if(cursor.moveToFirst())
         {

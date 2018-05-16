@@ -10,8 +10,8 @@ import java.util.List;
 public class User {
     
     private int _id;
-    private String _name;
-    private String _pass;
+    private String _name = "";
+    private String _pass = "";
     private String _receipt_list = "";
 
     public String get_receipt_list() { return _receipt_list; }

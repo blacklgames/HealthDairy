@@ -45,8 +45,6 @@ public class DB
         return mReceipts;
     }
 
-    public IDBDrugsHandler drugs() {
-        return mDrugs;
-    }
+    public IDBDrugsHandler drugs() {return mDrugs;}
 
 }
