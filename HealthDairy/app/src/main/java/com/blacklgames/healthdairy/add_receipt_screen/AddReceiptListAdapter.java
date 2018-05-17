@@ -2,7 +2,6 @@ package com.blacklgames.healthdairy.add_receipt_screen;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 
 import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.dataobjects.Drug;
-import com.blacklgames.healthdairy.db.dataobjects.Receipt;
-import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
 
@@ -36,7 +33,7 @@ public class AddReceiptListAdapter extends RecyclerView.Adapter<AddReceiptListAd
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mName = (TextView) v.findViewById(R.id.di_textDrugName);
+            mName = (TextView) v.findViewById(R.id.um_txtDiagmose);
             mMethod = (TextView) v.findViewById(R.id.di_textDrugMethod);
         }
 

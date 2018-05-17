@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.blacklgames.healthdairy.R;
 import com.blacklgames.healthdairy.db.dataobjects.Drug;
-import com.blacklgames.healthdairy.db.dataobjects.Receipt;
 
 import java.util.ArrayList;
 
@@ -35,7 +34,7 @@ public class ReceiptMainListAdapter extends RecyclerView.Adapter<ReceiptMainList
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mDrugName = (TextView) v.findViewById(R.id.di_textDrugName);
+            mDrugName = (TextView) v.findViewById(R.id.um_txtDiagmose);
             mDrugMethod = (TextView) v.findViewById(R.id.di_textDrugMethod);
         }
 

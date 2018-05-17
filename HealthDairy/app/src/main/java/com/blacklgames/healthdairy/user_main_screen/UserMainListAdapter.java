@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blacklgames.healthdairy.R;
+import com.blacklgames.healthdairy.db.DB;
+import com.blacklgames.healthdairy.db.dataobjects.Drug;
 import com.blacklgames.healthdairy.db.dataobjects.Receipt;
 import com.blacklgames.healthdairy.receipt_main_screen.ReceiptMainActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapter.ViewHolder>
@@ -36,9 +39,9 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mDiagnoseText = (TextView) v.findViewById(R.id.di_textDrugName);
-            mDateText = (TextView) v.findViewById(R.id.di_textDrugMethod);
-            mDrugsText = (TextView) v.findViewById(R.id.text_drugs);
+            mDiagnoseText = (TextView) v.findViewById(R.id.um_txtDiagmose);
+            mDateText = (TextView) v.findViewById(R.id.um_txtDate);
+            mDrugsText = (TextView) v.findViewById(R.id.um_txtDrugList);
         }
 
         @Override
@@ -79,9 +82,16 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position)
     {
+        String drugs = "";
+        List<Drug> dList = DB.get().drugs().getDrugsById(mReceiptList.get(position).get_drug_list());
+        for (Drug d : dList) {
+            Log.d("umla", "d.get_name()" + d.get_name());
+            drugs += d.get_name() + ", ";
+        }
+        Log.d("umla", "drugs " + drugs);
         holder.mDiagnoseText.setText(mReceiptList.get(position).get_diagnosis());
         holder.mDateText.setText(mReceiptList.get(position).get_date());
-        holder.mDrugsText.setText(mReceiptList.get(position).get_drug_list());
+        holder.mDrugsText.setText(drugs);
     }
 
     // Возвращает размер данных (вызывается layout manager-ом)
