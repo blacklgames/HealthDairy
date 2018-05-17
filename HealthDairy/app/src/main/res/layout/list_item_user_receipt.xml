@@ -25,11 +25,11 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/um_txtDiagmose"
+            app:layout_constraintTop_toBottomOf="@+id/ad_txtDiagnose"
             tools:text="1234hello" />
 
         <TextView
-            android:id="@+id/um_txtDiagmose"
+            android:id="@+id/ad_txtDiagnose"
             android:layout_width="263dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
@@ -70,7 +70,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_accept"
             app:layout_constraintHorizontal_bias="0.015"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/um_txtDiagmose"
+            app:layout_constraintTop_toBottomOf="@+id/ad_txtDiagnose"
             tools:text="1234hello" />
 
         <View

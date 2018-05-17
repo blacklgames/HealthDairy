@@ -12,16 +12,30 @@
         android:layout_marginBottom="1dp">
 
         <TextView
-            android:id="@+id/um_txtDiagmose"
+            android:id="@+id/ad_txtDiagnose"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:text="@string/app_name"
-            android:textSize="18sp"
+            android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ad_txtDrugMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ad_txtDiagnose" />
 
         <View
             android:id="@+id/divider"
@@ -31,22 +45,12 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="63dp" />
-
-        <TextView
-            android:id="@+id/di_textDrugMethod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:text="TextView"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/um_txtDiagmose" />
+            app:layout_constraintTop_toBottomOf="@+id/ad_txtDrugMethod" />
 
     </android.support.constraint.ConstraintLayout>
 

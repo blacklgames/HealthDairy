@@ -39,7 +39,7 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mDiagnoseText = (TextView) v.findViewById(R.id.um_txtDiagmose);
+            mDiagnoseText = (TextView) v.findViewById(R.id.ad_txtDiagnose);
             mDateText = (TextView) v.findViewById(R.id.um_txtDate);
             mDrugsText = (TextView) v.findViewById(R.id.um_txtDrugList);
         }

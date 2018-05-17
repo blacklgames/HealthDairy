@@ -76,6 +76,11 @@ public class AddReceiptActivity extends AppCompatActivity
         mList.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(this);
         mList.setLayoutManager(mLayoutManager);
+
+        Receipt receipt = DB.get().receipts().getReceipt(mReceiptId);
+        mListAdapter = new AddReceiptListAdapter((ArrayList)DB.get().drugs().getDrugsById(receipt.get_drug_list()));
+        mList.setAdapter(mListAdapter);
+
     }
 
     @Override
@@ -96,8 +101,7 @@ public class AddReceiptActivity extends AppCompatActivity
             mDate.setText(receipt.get_date());
             mCoast.setText(Float.toString(receipt.get_coast()));
             mComments.setText(receipt.get_comments());
-            mListAdapter = new AddReceiptListAdapter((ArrayList)DB.get().drugs().getDrugsById(receipt.get_drug_list()));
-            mList.setAdapter(mListAdapter);
+            mListAdapter.setDataSet((ArrayList)DB.get().drugs().getDrugsById(receipt.get_drug_list()));
         }
     }
 

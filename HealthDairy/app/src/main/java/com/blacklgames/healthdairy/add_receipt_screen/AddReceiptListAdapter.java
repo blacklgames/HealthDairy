@@ -33,17 +33,13 @@ public class AddReceiptListAdapter extends RecyclerView.Adapter<AddReceiptListAd
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            mName = (TextView) v.findViewById(R.id.um_txtDiagmose);
-            mMethod = (TextView) v.findViewById(R.id.di_textDrugMethod);
+            mName = (TextView) v.findViewById(R.id.ad_txtDiagnose);
+            mMethod = (TextView) v.findViewById(R.id.ad_txtDrugMethod);
         }
 
         @Override
         public void onClick(View view) {
             Log.d("onClick", "onClick " + getPosition());
-
-            //Intent intent = new Intent(mContext, ReceiptMainActivity.class);
-            //intent.putExtra("RECEIPT_ID_POSITION", getPosition());
-            //mContext.startActivity(intent);
         }
 
         public void setContext(Context c)
@@ -56,6 +52,12 @@ public class AddReceiptListAdapter extends RecyclerView.Adapter<AddReceiptListAd
     public AddReceiptListAdapter(ArrayList<Drug> list)
     {
         mDrugList = list;
+    }
+
+    public void setDataSet(ArrayList<Drug> list)
+    {
+        mDrugList = list;
+        notifyDataSetChanged();
     }
 
     // Создает новые views (вызывается layout manager-ом)
