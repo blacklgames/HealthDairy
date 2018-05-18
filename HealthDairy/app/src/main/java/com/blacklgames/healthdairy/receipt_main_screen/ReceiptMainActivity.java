@@ -1,5 +1,6 @@
 package com.blacklgames.healthdairy.receipt_main_screen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,9 +28,17 @@ public class ReceiptMainActivity extends AppCompatActivity
     final public static String KEY_RECEIPT_ID_POSITION = "RECEIPT_ID_POSITION";
     final public static String KEY_RECEIPT_ID = "RECEIPT_ID";
 
+    int mReceiptId;
     private RecyclerView mList;
     private RecyclerView.LayoutManager mLayoutManager;
     private ReceiptMainListAdapter mListAdapter;
+
+    public static Intent getReceiptIdPositionIntent(Context context, int idPosition)
+    {
+        Intent intent = new Intent(context, ReceiptMainActivity.class);
+        intent.putExtra(KEY_RECEIPT_ID_POSITION, idPosition);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,10 +52,14 @@ public class ReceiptMainActivity extends AppCompatActivity
         getSupportActionBar().setTitle("Информация о рецепте");
 
         Intent intent = getIntent();
-        User user = DB.get().users().getUser(0);
         int intentData = intent.getIntExtra(KEY_RECEIPT_ID_POSITION, 0);
-        final int receiptId = Character.getNumericValue(user.get_receipt_list().charAt(intentData));
-        Receipt receipt = DB.get().receipts().getReceipt(receiptId);
+
+        Log.d(TAG, "intentData " + intentData );
+        Log.d(TAG, "DB.get().users().getUser(0).get_receipt_list() " + DB.get().users().getUser(0).get_receipt_list() );
+        Log.d(TAG, "DB.get().users().getUser(0).get_receipt_list().charAt(intentData) " + DB.get().users().getUser(0).get_receipt_list().charAt(intentData) );
+
+        mReceiptId = Character.getNumericValue(DB.get().users().getUser(0).get_receipt_list().charAt(intentData));
+        Receipt receipt = DB.get().receipts().getReceipt(mReceiptId);
 
         TextView tfDiagnose =   (TextView)findViewById(R.id.ar_txtDiagnose);
         TextView tfDate =       (TextView)findViewById(R.id.ar_txtDate);
@@ -63,12 +76,11 @@ public class ReceiptMainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editReceipt(receiptId);
+                editReceipt();
             }
         });
 
         ArrayList<Drug> drugList = (ArrayList)DB.get().drugs().getDrugsById(receipt.get_drug_list());
-        Log.d(TAG, "drugList.size " + drugList.size());
         mList = (RecyclerView)findViewById(R.id.rm_drugsList);
         mList.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(this);
@@ -100,10 +112,9 @@ public class ReceiptMainActivity extends AppCompatActivity
         this.finish();
     }
 
-    private void editReceipt(int receiptId)
+    private void editReceipt()
     {
-        Intent intent = new Intent(this, AddReceiptActivity.class);
-        intent.putExtra("RECEIPT_ID", receiptId);
+        Intent intent = AddReceiptActivity.getReceiptIdIntent(this, mReceiptId);
         startActivity(intent);
     }
 }

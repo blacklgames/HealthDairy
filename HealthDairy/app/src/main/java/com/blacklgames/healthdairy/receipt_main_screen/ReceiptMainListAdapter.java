@@ -3,6 +3,7 @@ package com.blacklgames.healthdairy.receipt_main_screen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,10 +42,6 @@ public class ReceiptMainListAdapter extends RecyclerView.Adapter<ReceiptMainList
         @Override
         public void onClick(View view) {
             Log.d("onClick", "onClick " + getPosition());
-
-            Intent intent = new Intent(mContext, ReceiptMainActivity.class);
-            intent.putExtra("RECEIPT_ID_POSITION", getPosition());
-            mContext.startActivity(intent);
         }
 
         public void setContext(Context c)
@@ -76,9 +73,16 @@ public class ReceiptMainListAdapter extends RecyclerView.Adapter<ReceiptMainList
     @Override
     public void onBindViewHolder(ViewHolder holder, int position)
     {
-        holder.mDrugName.setText(mDrugsList.get(position).get_name());
-        String method = ""; // TODO: create method;
+        Drug d = mDrugsList.get(position);
+        String c = holder.mContext.getString(R.string.ad_label_count_in);
+        String b = holder.mContext.getString(R.string.ad_label_by);
+        Resources res = holder.mContext.getResources();
+        String period = res.getStringArray(R.array.drug_period_list)[d.get_input_period()];
+        String pack = res.getStringArray(R.array.drug_pack_list)[d.get_pack()];
+        String method = d.get_input_count() + " " + c + period + " " + b + " " + d.get_drug_count() + " " + pack;
+        holder.mDrugName.setText(d.get_name());
         holder.mDrugMethod.setText(method);
+
     }
 
     // Возвращает размер данных (вызывается layout manager-ом)

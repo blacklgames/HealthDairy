@@ -172,10 +172,10 @@ public class DBReceiptsHandler implements IDBReceiptsHandler
                 new String[]{String.valueOf(receipt.get_id())});
     }
 
-    public void deleteReceipt(Receipt receipt)
+    public void deleteReceipt(int receiptId)
     {
         SQLiteDatabase db = mContext.openOrCreateDatabase(DATABASE_NAME, 0, null);
-        db.delete(TABLE_NAME, KEY_RECEIPT_ID + " =?", new String[]{String.valueOf(receipt.get_id())});
+        db.delete(TABLE_NAME, KEY_RECEIPT_ID + " =?", new String[]{String.valueOf(receiptId)});
         db.close();
     }
 

@@ -2,6 +2,7 @@ package com.blacklgames.healthdairy.add_receipt_screen;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,7 +79,12 @@ public class AddReceiptListAdapter extends RecyclerView.Adapter<AddReceiptListAd
     public void onBindViewHolder(ViewHolder holder, int position)
     {
         Drug d = mDrugList.get(position);
-        String method = d.get_input_count() + " " + R.string.ad_label_count_in + d.get_input_period()+ " " + R.string.ad_label_by  + " " + d.get_drug_count();
+        String c = holder.mContext.getString(R.string.ad_label_count_in);
+        String b = holder.mContext.getString(R.string.ad_label_by);
+        Resources res = holder.mContext.getResources();
+        String period = res.getStringArray(R.array.drug_period_list)[d.get_input_period()];
+        String pack = res.getStringArray(R.array.drug_pack_list)[d.get_pack()];
+        String method = d.get_input_count() + " " + c + period + " " + b + " " + d.get_drug_count() + " " + pack;
 
         holder.mName.setText(d.get_name());
         holder.mMethod.setText(method);

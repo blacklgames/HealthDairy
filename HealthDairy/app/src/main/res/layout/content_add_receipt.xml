@@ -8,154 +8,165 @@
     tools:context=".add_receipt_screen.AddReceiptActivity"
     tools:showIn="@layout/activity_add_receipt">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/labels"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/textView4"
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Диагноз:"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Дата:"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="45dp" />
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Симптомы:"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="181dp"
-                tools:layout_editor_absoluteY="197dp" />
+                <LinearLayout
+                    android:id="@+id/labels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Цена:"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="85dp" />
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Диагноз:"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="8dp" />
 
-            <TextView
-                android:id="@+id/textView7"
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Дата:"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="45dp" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Симптомы:"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="181dp"
+                        tools:layout_editor_absoluteY="197dp" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Цена:"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="85dp" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Препараты:"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="171dp"
+                        tools:layout_editor_absoluteY="243dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/textfields"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/ar_txtDiagnose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textSize="18sp"
+                        tools:layout_editor_absoluteX="171dp"
+                        tools:layout_editor_absoluteY="16dp" />
+
+                    <EditText
+                        android:id="@+id/ar_txtDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:textSize="18sp"
+                        tools:layout_editor_absoluteX="172dp"
+                        tools:layout_editor_absoluteY="84dp" />
+
+                    <EditText
+                        android:id="@+id/ar_txtComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        android:textSize="18sp"
+                        tools:layout_editor_absoluteX="165dp"
+                        tools:layout_editor_absoluteY="171dp" />
+
+                    <EditText
+                        android:id="@+id/ar_txtCoast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="0,0"
+                        android:textSize="18sp"
+                        tools:layout_editor_absoluteX="168dp"
+                        tools:layout_editor_absoluteY="127dp" />
+
+                    <Button
+                        android:id="@+id/ar_btnAddDrug"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Добавить" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ar_DrugsList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Препараты:"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="171dp"
-                tools:layout_editor_absoluteY="243dp" />
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:listitem="@layout/list_item_receipt_drugs" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/textfields"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/ar_txtDiagnose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="171dp"
-                tools:layout_editor_absoluteY="16dp" />
-
-            <EditText
-                android:id="@+id/ar_txtDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="172dp"
-                tools:layout_editor_absoluteY="84dp" />
-
-            <EditText
-                android:id="@+id/ar_txtComments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="165dp"
-                tools:layout_editor_absoluteY="171dp" />
-
-            <EditText
-                android:id="@+id/ar_txtCoast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="0,0"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="168dp"
-                tools:layout_editor_absoluteY="127dp" />
-
-            <Button
-                android:id="@+id/ar_btnAddDrug"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Добавить" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/ar_DrugsList"
-        android:layout_width="360dp"
-        android:layout_height="265dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:listitem="@layout/list_item_receipt_drugs" />
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

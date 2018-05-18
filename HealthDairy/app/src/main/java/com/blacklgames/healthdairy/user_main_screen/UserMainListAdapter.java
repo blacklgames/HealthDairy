@@ -47,9 +47,7 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
         @Override
         public void onClick(View view) {
             Log.d("onClick", "onClick " + getPosition());
-
-            Intent intent = new Intent(mContext, ReceiptMainActivity.class);
-            intent.putExtra("RECEIPT_ID_POSITION", getPosition());
+            Intent intent = ReceiptMainActivity.getReceiptIdPositionIntent(mContext, getPosition());
             mContext.startActivity(intent);
         }
 
@@ -63,6 +61,12 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     public UserMainListAdapter(ArrayList<Receipt> list)
     {
         mReceiptList = list;
+    }
+
+    public void setReceiptData(ArrayList<Receipt> list)
+    {
+        mReceiptList = list;
+        notifyDataSetChanged();
     }
 
     // Создает новые views (вызывается layout manager-ом)
@@ -84,9 +88,9 @@ public class UserMainListAdapter extends RecyclerView.Adapter<UserMainListAdapte
     {
         String drugs = "";
         List<Drug> dList = DB.get().drugs().getDrugsById(mReceiptList.get(position).get_drug_list());
-        for (Drug d : dList) {
-            Log.d("umla", "d.get_name()" + d.get_name());
-            drugs += d.get_name() + ", ";
+
+        for (int i = 0 ; i < dList.size(); ++i) {
+            drugs += dList.get(i).get_name() + ((i < dList.size()-1) ? ", " : "");
         }
         Log.d("umla", "drugs " + drugs);
         holder.mDiagnoseText.setText(mReceiptList.get(position).get_diagnosis());

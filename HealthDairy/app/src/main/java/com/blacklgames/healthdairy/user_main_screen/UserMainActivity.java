@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +25,9 @@ import java.util.ArrayList;
 
 public class UserMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+    final private static String TAG = "UserMainActivity";
+
+    User mUser;
     private int mCurrentUser = 0;
     private RecyclerView mList;
     private UserMainListAdapter mListAdapter;
@@ -54,18 +58,24 @@ public class UserMainActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mUser = DB.get().users().getUser(mCurrentUser);
         mList = (RecyclerView)findViewById(R.id.receiptList);
         mList.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(this);
         mList.setLayoutManager(mLayoutManager);
+        mListAdapter = new UserMainListAdapter((ArrayList)DB.get().receipts().getReceiptsById(mUser.get_receipt_list()));
+        mList.setAdapter(mListAdapter);
+
+        Log.d(TAG, "mUser.get_receipt_list() " + mUser.get_receipt_list());
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-        User user = DB.get().users().getUser(0);
-        mListAdapter = new UserMainListAdapter((ArrayList)DB.get().receipts().getReceiptsById(user.get_receipt_list()));
-        mList.setAdapter(mListAdapter);
+        Log.d(TAG, "onResume mUser.get_receipt_list() " + mUser.get_receipt_list());
+        mUser = DB.get().users().getUser(mCurrentUser);
+        mListAdapter.setReceiptData((ArrayList)DB.get().receipts().getReceiptsById(mUser.get_receipt_list()));
     }
 
     private void addReceipt()
